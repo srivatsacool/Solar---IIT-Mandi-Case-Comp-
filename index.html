@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SURYA OS - Sustainable Solar Circular Economy</title>
+    <!-- Modern Typography: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        
+        <!-- Mobile Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <i class="fa-solid fa-sun brand-icon"></i>
+                <span class="brand-text">SURYA <span class="brand-os">OS</span></span>
+                <button class="close-sidebar-btn" id="closeSidebarBtn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <div class="sidebar-section">
+                <p class="section-label">Core Modules</p>
+                <nav class="sidebar-nav">
+                    <a href="#" class="nav-link active" data-target="dashboard-kabadiwala">
+                        <i class="fa-solid fa-earth-asia"></i>
+                        <span>GIS & Logistics</span>
+                    </a>
+                    <a href="#" class="nav-link" data-target="dashboard-triage">
+                        <i class="fa-solid fa-camera-viewfinder"></i>
+                        <span>AI-Vision Triage</span>
+                    </a>
+                    <a href="#" class="nav-link" data-target="dashboard-bio">
+                        <i class="fa-solid fa-flask-vial"></i>
+                        <span>Bio-Extraction Unit</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-section mt-auto border-t border-sidebar-hover pt-4">
+                <p class="section-label">System Status</p>
+                <div class="sys-status flex align-center gap-2 text-xs text-muted mb-2">
+                    <span class="dot bg-green p-1 rounded-full"></span> API Gateway Online
+                </div>
+                <div class="sys-status flex align-center gap-2 text-xs text-muted mb-4">
+                    <span class="dot bg-green p-1 rounded-full"></span> Blockchain Sync: Block #88219
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="user-profile interactive-element">
+                    <div class="avatar">R</div>
+                    <div class="user-info">
+                        <span class="user-name">Ramesh Kumar</span>
+                        <span class="user-role">Operations Lead</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fa-solid fa-bars"></i></button>
+                    <div class="header-search border-focus-transition">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Search twin IDs, coordinates, panels...">
+                    </div>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="dropdown-wrapper">
+                        <button class="icon-btn" id="notifToggle">
+                            <i class="fa-regular fa-bell"></i>
+                            <span class="badge" id="notifBadge">4</span>
+                        </button>
+                    </div>
+                    <button class="icon-btn hidden-mobile"><i class="fa-solid fa-gear"></i></button>
+                    <button class="primary-btn pulse scan-trigger-btn">
+                        <i class="fa-solid fa-qrcode"></i> <span class="hidden-mobile">Register Panel</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard Views Container -->
+            <div class="views-container" id="scrollContainer">
+
+                <!-- View 1: GIS Map & Predict Engine -->
+                <div class="dashboard-view active" id="dashboard-kabadiwala">
+                    <div class="view-header flex justify-between align-start flex-col-mobile">
+                        <div>
+                            <h1 class="view-title">Economic & Social Logistics</h1>
+                            <p class="view-subtitle">The 'Uber' for Solar / Spatial Prediction Engine</p>
+                        </div>
+                        <div class="flex gap-2 mt-2-mobile">
+                            <div class="data-pill"><i class="fa-solid fa-satellite-dish text-info"></i> MNRE Data Linked</div>
+                            <div class="data-pill"><i class="fa-solid fa-robot text-gold"></i> Time-Series ML Active</div>
+                        </div>
+                    </div>
+
+                    <div class="grid-layout gis-grid">
+                        
+                        <!-- Main Interactive Map -->
+                        <div class="widget map-widget interactive-card">
+                            <div class="widget-head flex justify-between align-center border-b">
+                                <div class="flex align-center gap-2">
+                                    <h3 class="font-bold uppercase text-sm">Spatial Heatmap Forecast</h3>
+                                </div>
+                                <div class="btn-group">
+                                    <button class="micro-btn active">All</button>
+                                    <button class="micro-btn text-danger">Critical</button>
+                                    <button class="micro-btn text-green">Optimal</button>
+                                </div>
+                            </div>
+                            <div class="widget-body p-0 flex relative bg-black map-body-container">
+                                
+                                <!-- The MAP visually -->
+                                <div class="map-visual relative flex-1 overflow-hidden">
+                                    <img src="assets/heatmap_rajasthan_1773604463025.png" alt="Heatmap" class="full-img bg-img transition-transform" id="gisMapImg">
+                                    <div class="overlay-gradient"></div>
+                                    
+                                    <!-- Interactive Markers -->
+                                    <div class="geo-markers" id="mapMarkers">
+                                        <div class="marker urgent interactive-marker" data-loc="Bikaner" data-cap="80" data-cost="₹420" data-panels="142" style="top: 35%; left: 45%;">
+                                            <div class="pulse-ring"></div><div class="dot"></div>
+                                        </div>
+                                        <div class="marker active interactive-marker selected" data-loc="Jodhpur Rural" data-cap="95" data-cost="₹310" data-panels="380" style="top: 60%; left: 65%;">
+                                            <div class="pulse-ring"></div><div class="dot"></div>
+                                        </div>
+                                        <div class="marker normal interactive-marker" data-loc="Jaipur Exurbs" data-cap="45" data-cost="₹600" data-panels="85" style="top: 20%; left: 75%;">
+                                            <div class="pulse-ring"></div><div class="dot"></div>
+                                        </div>
+                                        <div class="marker urgent interactive-marker" data-loc="Udaipur Cluster" data-cap="88" data-cost="₹380" data-panels="210" style="top: 75%; left: 35%;">
+                                            <div class="pulse-ring"></div><div class="dot"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Floating Commercial Win stat -->
+                                    <div class="floating-stat glassmorphism bottom-left">
+                                        <div class="flex align-center gap-2 mb-1">
+                                            <i class="fa-solid fa-trophy text-gold text-lg"></i>
+                                            <span class="uppercase font-bold text-xs text-muted">The Commercial Win</span>
+                                        </div>
+                                        <strong class="text-sm font-bold">Eliminates "Blind Driving" Search Costs</strong>
+                                    </div>
+                                </div>
+
+                                <!-- Map Data Sidebar -->
+                                <div class="map-data-panel glassmorphism flex-col">
+                                    <div class="panel-header uppercase font-bold text-xs text-muted mb-2 border-b border-light pb-2">Target Node Snapshot</div>
+                                    <div class="flex justify-between align-center mb-3">
+                                        <div class="text-lg font-bold text-white uppercase" id="nodeName">Jodhpur Rural</div>
+                                        <div class="status-badge running"><span class="dot"></span>LIVE</div>
+                                    </div>
+                                    
+                                    <div class="metric-row border-b border-light pb-2 mb-2">
+                                        <span class="text-xs text-muted w-24">Yield Prediction:</span>
+                                        <strong class="text-white text-sm" id="nodePanels">380 Panels</strong>
+                                    </div>
+                                    <div class="metric-row border-b border-light pb-2 mb-2">
+                                        <span class="text-xs text-muted w-24">Est. Value (Ag):</span>
+                                        <strong class="text-gold text-sm" id="nodeCost">~ ₹4.2L</strong>
+                                    </div>
+                                    <div class="metric-row mb-4">
+                                        <span class="text-xs text-muted w-24">Status:</span>
+                                        <strong class="text-danger text-sm" id="nodeCapStatus">95% Critical Mass</strong>
+                                    </div>
+
+                                    <!-- Radial Chart embedded in sidebar -->
+                                    <div class="flex justify-center mb-4 relative">
+                                        <svg viewBox="0 0 36 36" class="circular-chart small">
+                                            <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                            <path class="circle" id="nodeChart" stroke-dasharray="95, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                        </svg>
+                                        <div class="absolute inset-center flex-col align-center text-white">
+                                            <strong class="text-lg leading-none" id="nodePercentage">95</strong><span class="text-xs text-muted">%</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-xs text-center text-green font-bold mb-3 bg-green-dark p-2 rounded">
+                                        Transport Costs Cut by 40% (Batching)
+                                    </div>
+
+                                    <button class="primary-btn w-full justify-center mt-auto" id="dispatchBtn">
+                                        <i class="fa-solid fa-truck-fast"></i> Dispatch Route
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Instant Payout Feed / Kabadiwala Integration -->
+                        <div class="widget payout-feed-widget interactive-card flex-col">
+                            <div class="widget-head">
+                                <h3>Kabadiwala Micro-Payments</h3>
+                                <div class="text-xs text-muted mt-1 font-bold">Formalizing Informal Sector via UPI</div>
+                            </div>
+                            <div class="widget-body flex-col relative h-full">
+                                
+                                <div class="total-payout-box mb-4 p-4 rounded bg-slate-50 border relative overflow-hidden">
+                                    <div class="text-xs text-muted uppercase font-bold mb-1">Today's Disbursements</div>
+                                    <div class="amount-large text-gold drop-shadow-sm font-black text-3xl" id="animatedPayout">₹0</div>
+                                    <i class="fa-solid fa-wallet text-gold text-5xl absolute right-10 bottom-0 opacity-10"></i>
+                                </div>
+
+                                <div class="recent-tx-list flex-1 overflow-y-auto pr-2 custom-scrollbar flex-col gap-2" id="txList">
+                                    <!-- Populated by JS -->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- View 2: AI-Vision Triage System -->
+                <div class="dashboard-view" id="dashboard-triage">
+                    <div class="view-header flex justify-between align-start flex-col-mobile">
+                        <div>
+                            <h1 class="view-title">AI-Vision Triage</h1>
+                            <p class="view-subtitle">The 'Eyes': Automated Computer Vision Sorting</p>
+                        </div>
+                        <div class="status-badge live">
+                            <span class="dot"></span> LIVE SORTING HUD
+                        </div>
+                    </div>
+
+                    <div class="grid-layout triage-grid">
+                        
+                        <!-- Camera Feed HUD Widget -->
+                        <div class="widget camera-widget relative flex-col bg-black overflow-hidden border-2 border-slate">
+                            <!-- Digital Twin Passport Overlay (Blockchain) -->
+                            <div class="passport-overlay glassmorphism p-3">
+                                <div class="flex justify-between align-center mb-2 border-b border-light pb-2">
+                                    <div class="text-xs uppercase font-bold text-info"><i class="fa-brands fa-hive"></i> Twin Passport</div>
+                                </div>
+                                <div class="flex-col gap-1 text-xs text-white">
+                                    <div class="flex justify-between">
+                                        <span class="text-slate-300">Hash ID:</span> 
+                                        <strong class="font-mono text-info" id="twinIdDisplay">RJ-SO-2026-004</strong>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-slate-300">Chain:</span> 
+                                        <strong>Polygon PoS (Verified)</strong>
+                                    </div>
+                                    <div class="flex justify-between border-t border-light pt-1 mt-1">
+                                        <span class="text-slate-300">Dumping Risk:</span> 
+                                        <strong class="text-green uppercase"><i class="fa-solid fa-shield-halved"></i> Prevented</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="h-full relative w-full flex align-center justify-center">
+                                <img src="assets/conveyor_panel_1773606610066.png" class="full-img scan-img" id="liveScanImg" alt="Conveyor Feed">
+                                
+                                <!-- Futuristic HUD Overlays -->
+                                <div class="hud-corners">
+                                    <div class="corner tl"></div><div class="corner tr"></div>
+                                    <div class="corner bl"></div><div class="corner br"></div>
+                                </div>
+                                <div class="laser-mesh">
+                                    <div class="laser-line v-line" style="left: 20%;"></div>
+                                    <div class="laser-line v-line" style="left: 50%;"></div>
+                                    <div class="laser-line v-line" style="left: 80%;"></div>
+                                    <div class="laser-line h-line scanner"></div>
+                                </div>
+                                
+                                <div class="scan-overlay-text text-center" id="scanLoadingText">
+                                    <div>AI VISION INITIALIZING</div>
+                                    <div class="text-sm font-normal text-muted mt-2">Running crack detection protocols...</div>
+                                </div>
+
+                                <!-- Bounding Boxes (Simulated CV) -->
+                                <div class="cv-bounding-box" style="top: 30%; left: 40%; width: 50px; height: 50px;">
+                                    <span class="cv-label">Micro-crack: 92%</span>
+                                </div>
+                                <div class="cv-bounding-box" style="top: 60%; left: 60%; width: 100px; height: 120px;">
+                                    <span class="cv-label">Cell Array: Intact</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Analysis Panel Widget -->
+                        <div class="widget analysis-widget flex-col">
+                            <div class="widget-head bg-slate-50 border-b">
+                                <h3>Real-Time Diagnostic Stream</h3>
+                                <i class="fa-solid fa-microchip text-info text-lg"></i>
+                            </div>
+                            <div class="widget-body flex-col gap-4">
+                                
+                                <!-- Health Classification -->
+                                <div class="health-block glass-panel p-4 rounded border relative overflow-hidden">
+                                    <div class="absolute right-0 top-0 h-full w-2 bg-gold"></div>
+                                    <div class="flex align-center gap-4">
+                                        <div class="score-dial text-gold border-4 border-gold bg-gold-light-alpha">
+                                            74<span class="text-xs">%</span>
+                                        </div>
+                                        <div class="flex-col">
+                                            <h4 class="text-gold font-black uppercase tracking-wide">Refurbish Candidate</h4>
+                                            <p class="text-xs text-muted mt-1 leading-relaxed">Micro-cracks detected. Overall cell integrity remains viable for lower wattage applications.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Material Array -->
+                                <div class="material-array flex-col">
+                                    <h3 class="text-xs font-bold uppercase text-muted mb-3 flex align-center gap-2">
+                                        <i class="fa-solid fa-layer-group"></i> Material Composition Array
+                                    </h3>
+                                    <div class="resource-bars flex-col gap-3">
+                                        <div class="res-row interactive-row">
+                                            <div class="res-label text-sm font-bold w-24">Silver (Ag)</div>
+                                            <div class="res-track"><div class="res-fill bg-gold" style="width: 95%;"></div></div>
+                                            <div class="res-val font-mono text-sm">95%</div>
+                                        </div>
+                                        <div class="res-row interactive-row">
+                                            <div class="res-label text-sm font-bold w-24">Silicon (Si)</div>
+                                            <div class="res-track"><div class="res-fill bg-info" style="width: 88%;"></div></div>
+                                            <div class="res-val font-mono text-sm">88%</div>
+                                        </div>
+                                        <div class="res-row interactive-row">
+                                            <div class="res-label text-sm font-bold w-24 text-muted">Glass</div>
+                                            <div class="res-track"><div class="res-fill bg-slate-300" style="width: 100%;"></div></div>
+                                            <div class="res-val font-mono text-sm text-muted">100%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Splitting Logic (Path A/B) -->
+                                <div class="routing-logic mt-auto pt-4 border-t border-dashed">
+                                    <div class="text-xs uppercase font-black text-muted mb-2 tracking-wide"><i class="fa-solid fa-code-branch"></i> Automated Routing Decision</div>
+                                    
+                                    <div class="flex-col gap-2">
+                                        <button class="route-btn active text-left group" id="routeSecondLifeBtn">
+                                            <div class="icon-box bg-green-light text-green rounded p-2 mr-3 group-hover-white transition-colors">
+                                                <i class="fa-solid fa-school text-xl"></i>
+                                            </div>
+                                            <div class="flex-col">
+                                                <span class="font-black text-sm text-green group-hover-white uppercase tracking-wider transition-colors">Path A: Refurbish</span>
+                                                <span class="text-xs font-normal text-muted group-hover-white transition-colors">Route to Second-Life (Rural Schools)</span>
+                                            </div>
+                                            <i class="fa-solid fa-arrow-right ml-auto text-green group-hover-white transition-colors"></i>
+                                        </button>
+                                        
+                                        <button class="route-btn inactive text-left bg-slate-50 border border-slate-200">
+                                            <div class="icon-box bg-slate-200 text-slate-500 rounded p-2 mr-3">
+                                                <i class="fa-solid fa-flask-vial text-xl"></i>
+                                            </div>
+                                            <div class="flex-col opacity-50">
+                                                <span class="font-bold text-sm text-slate-700">Path B: Recycle</span>
+                                                <span class="text-xs font-normal text-slate-500">Divert to SURYA Bio-Extraction</span>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View 3: Bio-Extraction Unit -->
+                <div class="dashboard-view" id="dashboard-bio">
+                    <div class="view-header flex justify-between align-start flex-col-mobile">
+                        <div>
+                            <h1 class="view-title">Bio-Extraction Unit</h1>
+                            <p class="view-subtitle">Digital Brain & Bacteria Processing Simulator</p>
+                        </div>
+                    </div>
+
+                    <div class="grid-layout bio-grid">
+                        
+                        <!-- Financial & Environmental Edge Row -->
+                        <div class="top-bio-row grid grid-cols-2 gap-6 w-full col-span-2">
+                            <div class="widget hero-stat green-hero interactive-card overflow-hidden relative" onclick="showToast('Credits verified on Polygon.', 'success')">
+                                <div class="widget-body flex-col justify-center h-full relative z-10">
+                                    <h3 class="text-xs text-green-100 uppercase font-bold tracking-widest"><i class="fa-solid fa-leaf mr-1"></i> Digital Green Credit Market</h3>
+                                    <div class="huge-number mt-2 mb-1 text-white flex align-baseline gap-2">
+                                        <span class="count-up font-black text-5xl" data-target="1452">0</span> 
+                                        <i class="fa-solid fa-arrow-trend-up text-green-300 text-2xl"></i>
+                                    </div>
+                                    <p class="text-xs text-green-100 mt-2 max-w-sm leading-relaxed">Trade for tax breaks or sell on open market.<br><span class="text-gold font-black bg-black-alpha px-1 rounded mt-1 inline-block">Turning compliance into a profit center.</span></p>
+                                </div>
+                                <i class="fa-solid fa-seedling watermark absolute -bottom-10 -right-10 text-9xl opacity-10 text-white transform rotate-12"></i>
+                            </div>
+
+                            <div class="widget cost-widget interactive-card">
+                                <div class="widget-head bg-slate-50 border-b">
+                                    <h3 class="text-xs uppercase font-bold text-slate-700">Extraction Advantage Comparison</h3>
+                                </div>
+                                <div class="widget-body flex-col justify-center p-6">
+                                    <div class="flex align-center justify-between">
+                                        <div class="flex-col text-center">
+                                            <span class="text-xs uppercase font-bold text-slate-400 mb-1">Traditional Acid</span>
+                                            <span class="text-2xl font-black text-danger mb-1">₹5,000<span class="text-xs font-normal text-slate-400">/ton</span></span>
+                                            <span class="text-xs bg-red-50 text-danger px-2 py-1 rounded font-bold border border-red-100">Harsh & Manual</span>
+                                        </div>
+                                        <div class="vs-circle bg-slate-800 text-white rounded-full w-8 h-8 flex align-center justify-center font-black text-xs shadow-md mx-2">VS</div>
+                                        <div class="flex-col text-center transform scale-105">
+                                            <span class="text-xs uppercase font-black text-green mb-1"><i class="fa-solid fa-flask text-xs"></i> SURYA Bio-Leaching</span>
+                                            <span class="text-3xl font-black text-green mb-1">₹4,000<span class="text-sm font-normal text-slate-400">/ton</span></span>
+                                            <span class="text-xs bg-green-50 text-green px-2 py-1 rounded font-black border border-green-200 shadow-sm">95% Ag/Si Recovery</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 pt-4 border-t border-dashed flex justify-between align-center">
+                                        <strong class="text-sm text-slate-700">20% Lower Processing Costs.</strong>
+                                        <span class="text-xs text-green bg-green-50 px-2 py-1 rounded font-black"><i class="fa-solid fa-shield-virus"></i> Zero Toxicity (Bacterial)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bio-Tank Monitor Widget (Massive Interactive Component) -->
+                        <div class="widget tank-widget interactive-card col-span-2 mt-2">
+                            <div class="widget-head flex justify-between bg-slate-900 border-b border-slate-700">
+                                <h3 class="text-white text-xs tracking-wider font-bold uppercase"><i class="fa-solid fa-microscope text-info mr-2"></i> The Digital Brain: Tank Diagnostics</h3>
+                                <div class="status-badge live bg-green-900 border border-green-500 text-green-300">
+                                    <span class="dot bg-green-400"></span> ACTIVE CYCLE RUNNING
+                                </div>
+                            </div>
+                            
+                            <!-- Interactive Flex Layout for Tank -->
+                            <div class="widget-body p-0 relative h-full min-h-[400px] flex bg-black overflow-hidden flex-col-mobile">
+                                
+                                <!-- Left side: The Visual Tank -->
+                                <div class="tank-visual-container flex-1 relative overflow-hidden" id="tankVisual">
+                                    <img src="assets/bio_tank_1773606013941.png" alt="Bio Tank" class="full-img tank-feed opacity-80 mix-blend-screen transition-transform duration-1000 scale-105">
+                                    <div class="tank-overlay-gradient absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                                    
+                                    <!-- Dynamic Floating Data Points on Tank -->
+                                    <div class="absolute top-1/4 left-1/4 glass-pill-mini pulse">
+                                        <span class="text-gold text-xs font-bold"><i class="fa-solid fa-temperature-half"></i> 32.4°C</span>
+                                    </div>
+                                    <div class="absolute top-1/2 right-1/4 glass-pill-mini pulse" style="animation-delay: 1s;">
+                                        <span class="text-info text-xs font-bold"><i class="fa-solid fa-droplet"></i> Acidithiobacillus</span>
+                                    </div>
+
+                                    <!-- Bottom Overlays -->
+                                    <div class="absolute bottom-6 w-full px-8 flex justify-between align-end">
+                                        <div class="glass-panel p-4 rounded-xl border border-light flex align-center gap-4 hover:bg-slate-800 transition-colors cursor-pointer">
+                                            <div class="radial-ph relative w-12 h-12 flex justify-center align-center border-4 border-info rounded-full">
+                                                <span class="text-white font-black">2.1</span>
+                                            </div>
+                                            <div class="flex-col">
+                                                <span class="text-xs text-slate-400 font-bold uppercase tracking-wider">ML-Optimized</span>
+                                                <span class="text-sm text-white font-bold">Dynamic pH Control</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="glass-panel p-4 rounded-xl border border-light flex align-center gap-4 hover:bg-slate-800 transition-colors cursor-pointer border-l-4 border-l-green-400">
+                                            <i class="fa-solid fa-diagram-next text-3xl text-green-400 blink-text"></i>
+                                            <div class="flex-col">
+                                                <span class="text-xs text-slate-400 font-bold uppercase tracking-wider">Bacterial Rate</span>
+                                                <span class="text-sm text-green-400 font-black">PEAK EXTRACTION ACTIVE</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Right side: The ML Log Terminal -->
+                                <div class="ml-terminal-panel w-80 bg-slate-900 border-l border-slate-700 flex flex-col hidden-mobile">
+                                    <div class="p-3 border-b border-slate-700 flex justify-between align-center bg-slate-800">
+                                        <span class="text-xs font-mono text-info font-bold"><i class="fa-solid fa-terminal"></i> PredictEngine.log</span>
+                                        <span class="flex gap-1">
+                                            <span class="w-3 h-3 rounded-full bg-danger"></span>
+                                            <span class="w-3 h-3 rounded-full bg-gold"></span>
+                                            <span class="w-3 h-3 rounded-full bg-green"></span>
+                                        </span>
+                                    </div>
+                                    <div class="terminal-body p-4 flex-1 overflow-hidden relative" id="mlTerminal">
+                                        <div class="terminal-content font-mono text-xs text-green-400 flex flex-col gap-2" id="terminalStream">
+                                            <!-- JS populated -->
+                                        </div>
+                                        <div class="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                                    </div>
+                                    <div class="p-3 bg-slate-800 border-t border-slate-700">
+                                        <div class="flex justify-between text-xs text-slate-400 font-mono">
+                                            <span>CPU: 32%</span>
+                                            <span>MEM: 1.2GB/16GB</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
